@@ -3,10 +3,11 @@ prepare time base prediction model
 prepare API
     -api should have two argument:
         -category
-        -how many years or month later?
+        -which month
 
 prepare front 
     -front should have slider for time base prediction
+
 
 deploy
     backend and front end:
