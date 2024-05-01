@@ -1,7 +1,15 @@
 prepare time base prediction model
 
 prepare API
+    -api should have two argument:
+        -category
+        -how many years or month later?
 
 prepare front 
+    -front should have slider for time base prediction
 
 deploy
+    backend and front end:
+        -maybe streamlit best option
+            -deploy back and front together ==>> apiless deploy
+        -or maybe traditional approach is the best ==>> front html css js backend django or fastapi
