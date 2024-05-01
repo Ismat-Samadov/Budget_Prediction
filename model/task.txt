@@ -1,0 +1,7 @@
+prepare time base prediction model
+
+prepare API
+
+prepare front 
+
+deploy
