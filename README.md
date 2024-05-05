@@ -4,6 +4,10 @@ The low performance of the model is related to the scarcity of data.
 
 
 
-$ python -m venv myvenv
+python -m venv myvenv
 
-$ source /c/Users/Ismat/Budget_Analyse/myvenv/Scripts/activate
+source myvenv/bin/activate
+
+pip3 freeze > requirements.txt  # Python3
+
+pip install -r requirements.txt
