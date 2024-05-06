@@ -27,6 +27,7 @@ def predict_expenses(df):
     if df.empty:
         return {}
     X = df[['time_seconds', 'dayofweek'] + [col for col in df.columns if 'category' in col]]
+    print("Shape of X:", X.shape)  # Debug print statement
     predictions = model.predict(X)
     category_expenses = dict(zip(df['category'], predictions))
     return category_expenses
@@ -47,10 +48,18 @@ def main():
     month = st.slider("Select Month:", 1, 12)
     year = st.number_input("Enter Year:", value=2022, step=1)
     df = pd.read_excel('07.2022---05.2024.xlsx')
+    print("Selected Month:", month)  # Debug print statement
+    print("Selected Year:", year)  # Debug print statement
     # Preprocess the data
     df = preprocess_data(df)
+    print("Unique 'datetime' values in df:", df['datetime'].unique())  # Debug print statement
 
     filtered_df = df[(df['datetime'].dt.month == month) & (df['datetime'].dt.year == year)]
+    # Select only the relevant features used during model training
+    filtered_df = filtered_df[['time_seconds', 'dayofweek'] + [col for col in filtered_df.columns if 'category' in col]]
+
+    print("Filtered DataFrame Shape:", filtered_df.shape)  # Debug print statement
+    print("Filtered DataFrame Head:", filtered_df.head())  # Debug print statement
     category_expenses = predict_expenses(filtered_df)
     display_results(category_expenses)
 

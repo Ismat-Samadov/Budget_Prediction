@@ -27,6 +27,7 @@ df['dayofweek'] = df['date'].dt.dayofweek
 
 # Splitting the data into training and testing sets
 X = df[['time_seconds', 'dayofweek'] + [col for col in df.columns if 'category' in col]]
+print(X.columns)
 y = df['amount']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
