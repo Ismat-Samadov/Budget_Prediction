@@ -40,7 +40,7 @@ model = RandomForestRegressor(n_estimators=200, random_state=42)
 model.fit(X_train_scaled, y_train)
 y_pred = model.predict(X_test_scaled)
 rmse = mean_squared_error(y_test, y_pred, squared=False)
-print("Tuned RandomForestRegressor Root Mean Squared Error:", rmse)
+print("Tuned RandomForestRegressor RMSE:", rmse)
 
 # Feature selection with SelectFromModel
 selector = SelectFromModel(model, threshold='median')
@@ -53,8 +53,9 @@ final_model = RandomForestRegressor(n_estimators=200, random_state=42)
 final_model.fit(X_train_selected, y_train)
 y_pred_final = final_model.predict(X_test_selected)
 rmse_final = mean_squared_error(y_test, y_pred_final, squared=False)
-print("Selected Features RandomForestRegressor Root Mean Squared Error:", rmse_final)
+print("Selected Features RMSE:", rmse_final)
 
 # Save the final 1.0.0 to a .pkl file
 with open('final_model.pkl', 'wb') as file:
     pickle.dump(final_model, file)
+
