@@ -36,7 +36,7 @@ def preprocess_data(df):
     df = pd.get_dummies(df, columns=['category'], drop_first=True)
     return df
 
-def split_and_scale_data(df, target_column='amount', test_size=0.2, random_state=42):
+def split_and_scale(df, target_column='amount', test_size=0.2, random_state=42):
     # Split data into features (X) and target (y)
     X = df.drop(target_column, axis=1)
     y = df[target_column]
@@ -61,6 +61,6 @@ df = pd.read_excel('07.2022---05.2024.xlsx')
 # Perform preprocessing
 df = preprocess_data(df)
 # Split and scale the data
-X_train_scaled, X_test_scaled, y_train, y_test = split_and_scale_data(df)
+X_train_scaled, X_test_scaled, y_train, y_test = split_and_scale(df)
 # Train and evaluate the model
 trained_model = train_and_evaluate_model(X_train_scaled, X_test_scaled, y_train, y_test)
