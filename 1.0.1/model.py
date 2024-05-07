@@ -40,11 +40,12 @@ def preprocess_data(df):
     df.drop(['date', 'time', 'datetime'], axis=1, inplace=True)
     # One-hot encode categorical variables
     df = pd.get_dummies(df, columns=['category'], drop_first=True)
-    categories = [col for col in df.columns if col.startswith('category_')]
-    # Save categories as JSON
-    with open('categories.json', 'w') as json_file:
-        json.dump(categories, json_file)
-    return df, categories
+    # Save columns used for training as JSON
+    columns_used = df.columns.tolist()
+    columns_used.remove('amount')  # Remove 'amount' column
+    with open('columns_used.json', 'w') as json_file:
+        json.dump(columns_used, json_file)
+    return df
 
 def split_and_scale(df, target_column='amount', test_size=0.2, random_state=42):
     """
@@ -53,7 +54,7 @@ def split_and_scale(df, target_column='amount', test_size=0.2, random_state=42):
     """
     logging.info("Splitting and scaling the data...")
     # Split data into features (X) and target (y)
-    X = df.drop(target_column, axis=1)
+    X = df.drop(target_column, axis=1)  # Exclude the target column
     y = df[target_column]
     # Split data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
@@ -81,7 +82,7 @@ def train_and_evaluate_model(X_train_scaled, X_test_scaled, y_train, y_test):
 # Read the dataset
 df = pd.read_excel('07.2022---05.2024.xlsx')
 # Perform preprocessing
-df, categories = preprocess_data(df)
+df = preprocess_data(df)
 # Split and scale the data
 X_train_scaled, X_test_scaled, y_train, y_test = split_and_scale(df)
 # Train and evaluate the model
