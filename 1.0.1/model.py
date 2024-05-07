@@ -4,14 +4,20 @@ from datetime import datetime
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import SelectFromModel
 from sklearn.metrics import mean_squared_error
 import pickle
+import logging
+import json
 import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def preprocess_data(df):
+    """
+    Preprocess the DataFrame by converting date and time columns,
+    extracting datetime features, and performing one-hot encoding.
+    """
+    logging.info("Performing data preprocessing...")
     # Convert 'date' and 'time' columns to datetime format
     df['date'] = pd.to_datetime(df['date'])
     df['time'] = pd.to_timedelta(df['time'].astype(str))
@@ -34,9 +40,18 @@ def preprocess_data(df):
     df.drop(['date', 'time', 'datetime'], axis=1, inplace=True)
     # One-hot encode categorical variables
     df = pd.get_dummies(df, columns=['category'], drop_first=True)
-    return df
+    categories = [col for col in df.columns if col.startswith('category_')]
+    # Save categories as JSON
+    with open('categories.json', 'w') as json_file:
+        json.dump(categories, json_file)
+    return df, categories
 
 def split_and_scale(df, target_column='amount', test_size=0.2, random_state=42):
+    """
+    Split the DataFrame into features and target variables,
+    then scale the features using StandardScaler.
+    """
+    logging.info("Splitting and scaling the data...")
     # Split data into features (X) and target (y)
     X = df.drop(target_column, axis=1)
     y = df[target_column]
@@ -49,17 +64,24 @@ def split_and_scale(df, target_column='amount', test_size=0.2, random_state=42):
     return X_train_scaled, X_test_scaled, y_train, y_test
 
 def train_and_evaluate_model(X_train_scaled, X_test_scaled, y_train, y_test):
+    """
+    Train a RandomForestRegressor model, evaluate its performance,
+    and save the trained model to a file.
+    """
+    logging.info("Training and evaluating the model...")
     model = RandomForestRegressor(n_estimators=200, random_state=42)
     model.fit(X_train_scaled, y_train)
     y_pred = model.predict(X_test_scaled)
     rmse = mean_squared_error(y_test, y_pred, squared=False)
     print("Root Mean Squared Error (RMSE):", rmse)
+    with open('final_model.pkl', 'wb') as file:
+        pickle.dump(model, file)
     return model
 
 # Read the dataset
 df = pd.read_excel('07.2022---05.2024.xlsx')
 # Perform preprocessing
-df = preprocess_data(df)
+df, categories = preprocess_data(df)
 # Split and scale the data
 X_train_scaled, X_test_scaled, y_train, y_test = split_and_scale(df)
 # Train and evaluate the model
