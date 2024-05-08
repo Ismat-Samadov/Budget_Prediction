@@ -40,8 +40,8 @@ with open('final_model.pkl', 'rb') as file:
 
 # Predict expenses for each category
 st.write("Predicted Expenses for", year_month)
-expenses = {}
-for category in columns_used[5:]:  # Exclude non-category columns
-    prediction = trained_model.predict(input_df)[0]
-    expenses[category] = prediction
+for category in columns_used[7:]:  # Start from index 7 for category columns
+    category_df = input_df.copy()  # Create a copy of input_df for each category
+    category_df[category] = 1  # Set the current category to 1
+    prediction = trained_model.predict(category_df)[0]
     st.write(f'{category}: ${prediction:.2f}')
