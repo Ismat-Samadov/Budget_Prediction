@@ -25,7 +25,6 @@ def preprocess_data(df):
         else:
             logging.info("Datetime column already timezone-aware.")
         current_datetime = datetime.now(timezone('UTC'))
-        df['time_diff'] = (current_datetime - df['datetime']).dt.days
         df['hours'] = df['datetime'].dt.hour
         df['weekday'] = df['datetime'].dt.weekday + 1
         df['year'] = df['datetime'].dt.year
