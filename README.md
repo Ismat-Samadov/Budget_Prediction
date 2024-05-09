@@ -63,6 +63,10 @@ For a more detailed exploration of how this project was built, its architectural
    ```
    This opens a web interface where users can input data and receive predictions.
 
+### Live Application
+
+The application is currently live and can be accessed at the following URL: [Budget Analyse on Streamlit](https://budjet.streamlit.app/). This provides an interactive way to explore the functionalities of the tool in real-time.
+
 ## Contributing
 
 Feel free to fork the repository and submit pull requests. For substantial changes, please open an issue first to discuss what you would like to change. Make sure to update or add tests as appropriate.
