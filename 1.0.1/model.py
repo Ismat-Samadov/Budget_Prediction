@@ -65,9 +65,9 @@ def train_and_evaluate_model(X_train_scaled, X_test_scaled, y_train, y_test):
     return model
 
 if os.path.exists('budjet.xlsx'):
-    df = pd.read_excel('budjet.xlsx')
+    df = pd.read_excel('budget.xlsx')
     df = preprocess_data(df)
     X_train_scaled, X_test_scaled, y_train, y_test = split_and_scale(df)
     trained_model = train_and_evaluate_model(X_train_scaled, X_test_scaled, y_train, y_test)
 else:
-    logging.error("Failed to find the file: budjet.xlsx")
+    logging.error("Failed to find the file: budget.xlsx")
