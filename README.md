@@ -1,8 +1,3 @@
-Let's enhance the README to provide more detailed descriptions for each of the three key files (`api.py`, `frontend.py`, and `model.py`) in your repository. These descriptions will explain the purpose and functionality of each component, making it easier for users and contributors to understand the structure and role of each part of your project.
-
-### Updated README.md for Budget Analyse
-
-```markdown
 # Budget Analyse
 
 This project provides a machine learning solution for analyzing and predicting budget-related data, using a RandomForest algorithm. It is structured into three main components: model training, a Flask API for predictions, and a Streamlit frontend for user interaction.
@@ -72,4 +67,3 @@ Feel free to fork the repository and submit pull requests. For substantial chang
 Ismat Samadov - [ismetsemedov@gmail.com](mailto:ismetsemedov@gmail.com)
 
 Project Link: [https://github.com/Ismat-Samadov/Budget_Analyse](https://github.com/Ismat-Samadov/Budget_Analyse)
-```
