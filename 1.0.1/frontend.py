@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 
 # Define the URL of the Flask API
-URL = "http://127.0.0.1:5000/predict"
+URL = "https://budget-analyse.onrender.com/predict"
 
 st.title('Machine Learning Prediction Interface')
 
