@@ -5,7 +5,7 @@ from datetime import datetime
 # Function to fetch predictions
 def fetch_predictions(month, year):
     date_str = f"{month:02d}.{year}"
-    url = f"http://127.0.0.1:5000/predict?date={date_str}"
+    url = f"https://budget-72z9.onrender.com/predict?date={date_str}"
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
