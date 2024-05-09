@@ -15,36 +15,6 @@ with open('fitted_scaler.pkl', 'rb') as scaler_file:
 with open('feature_names.json', 'r') as f:
     feature_names = json.load(f)
 
-# def create_input_data(year, month):
-#     num_days = pd.Period(f'{year}-{month}').days_in_month
-#     date_range = pd.date_range(start=f'{year}-{month}-01', periods=num_days, freq='D')
-#
-#     df = pd.DataFrame({
-#         'year': year,
-#         'month': month,
-#         'hours': np.repeat(12, num_days),
-#         'weekday': date_range.dayofweek + 1,
-#         'day_of_year': date_range.dayofyear
-#     })
-#
-#     categories = ['Clothing', 'Coffe', 'Communal', 'Events', 'Film/enjoyment', 'Fuel', 'Health',
-#                   'Learning', 'Market', 'Motel', 'Other', 'Phone', 'Rent Car', 'Restuarant',
-#                   'Sport', 'Taxi', 'Tech', 'Transport', 'Travel', 'joy']
-#     df['category'] = np.random.choice(categories, size=num_days)
-#
-#     df = pd.get_dummies(df, columns=['category'], prefix='category', drop_first=False)
-#
-#     # Ensure all expected categories are present
-#     expected_categories = ['category_' + cat for cat in categories]
-#     for category in expected_categories:
-#         if category not in df.columns:
-#             df[category] = 0
-#
-#     # Reorder columns to match the order used during model training
-#     df = df[feature_names]
-#
-#     return df
-
 def create_input_data(year, month):
     num_days = pd.Period(f'{year}-{month}').days_in_month
     date_range = pd.date_range(start=f'{year}-{month}-01', periods=num_days, freq='D')
