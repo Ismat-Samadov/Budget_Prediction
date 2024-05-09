@@ -10,6 +10,11 @@ The repository consists of three main Python scripts:
 - `api.py`: Implements a Flask API that serves as the backend for the project. This API loads the trained model and uses it to make predictions based on incoming requests.
 - `frontend.py`: A Streamlit application that provides a user-friendly web interface. Users can input data directly into the app, which communicates with the Flask API to display predictions.
 
+## Further Reading
+
+For a more detailed exploration of how this project was built, its architectural considerations, and step-by-step explanations of the code, check out our detailed article on Medium:
+- [Building a Budget Analysis Tool with Machine Learning and Python](https://ismatsamadov.medium.com/building-a-budget-analysis-tool-with-machine-learning-and-python-77954b2ec7a9)
+
 ## Getting Started
 
 ### Prerequisites
