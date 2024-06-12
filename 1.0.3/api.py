@@ -55,12 +55,19 @@ def predict_expenses():
     try:
         month, year = map(int, date_str.split('.'))
         df_input = create_input_data(year, month)
+        
+        # Log input data
+        logging.info(f'Input Data: {df_input.head()}')
+        
         df_scaled = scaler.transform(df_input)
-
-        # Log scaled input data for debugging
-        logging.debug(f'Scaled Input Data: {df_scaled[:5]}')
-
+        
+        # Log scaled input data
+        logging.info(f'Scaled Input Data: {df_scaled[:5]}')
+        
         predictions = model.predict(df_scaled)
+        
+        # Log raw predictions
+        logging.info(f'Raw Predictions: {predictions[:5]}')
 
         # Aggregate predictions by categories
         category_expenses = {}
@@ -87,4 +94,5 @@ def predict_expenses():
         return jsonify({"error": str(e)}), 400
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     app.run(debug=True)
