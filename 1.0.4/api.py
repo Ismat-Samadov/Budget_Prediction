@@ -5,6 +5,7 @@ import numpy as np
 from datetime import datetime
 import json
 import logging
+import os
 
 app = Flask(__name__)
 
@@ -16,10 +17,19 @@ with open('fitted_scaler.pkl', 'rb') as scaler_file:
 with open('feature_names.json', 'r') as f:
     feature_names = json.load(f)
 
+# Check if mean_std_values.json exists
+if not os.path.exists('mean_std_values.json'):
+    logging.error("Failed to find the file: mean_std_values.json")
+    mean_std_values = None
+else:
+    with open('mean_std_values.json', 'r') as f:
+        mean_std_values = json.load(f)
+
 def create_input_data(year, month):
     num_days = pd.Period(f'{year}-{month}').days_in_month
     date_range = pd.date_range(start=f'{year}-{month}-01', periods=num_days, freq='D')
 
+    # Use the exact feature names as used in the training dataset
     categories = ['Clothing', 'Coffe', 'Communal', 'Events', 'Film/enjoyment', 'Fuel', 'Health',
                   'Learning', 'Market', 'Motel', 'Other', 'Phone', 'Rent Car', 'Restuarant',
                   'Sport', 'Taxi', 'Tech', 'Transport', 'Travel', 'joy']
@@ -36,11 +46,13 @@ def create_input_data(year, month):
         })
 
         df = pd.get_dummies(df, columns=['category'], prefix='category', drop_first=False)
+        # Add missing category columns with 0 as default
         expected_categories = ['category_' + cat for cat in categories]
         for exp_cat in expected_categories:
             if exp_cat not in df.columns:
                 df[exp_cat] = 0
 
+        # Reorder columns to match the order used during model training
         df = df[['hours', 'weekday', 'year', 'day_of_year', 'month'] + expected_categories]
         dfs.append(df)
 
@@ -53,28 +65,34 @@ def predict_expenses():
         month, year = map(int, date_str.split('.'))
         df_input = create_input_data(year, month)
         
+        # Log input data
         logging.info(f'Input Data: {df_input.head()}')
         
         df_scaled = scaler.transform(df_input)
         
+        # Log scaled input data
         logging.info(f'Scaled Input Data: {df_scaled[:5]}')
         
         predictions = model.predict(df_scaled)
         
+        # Log raw predictions
         logging.info(f'Raw Predictions: {predictions[:5]}')
 
+        # Aggregate predictions by categories
         category_expenses = {}
-        total_expenses = 0
+        total_expenses = 0  # Initialize total expenses
         category_prefix = "category_"
         for col in df_input.columns:
             if col.startswith(category_prefix):
                 category_name = col[len(category_prefix):]
+                # Sum and round the predictions for this category
                 total = predictions[df_input[col] == 1].sum()
-                if total > 0:
+                if total > 0:  # Filter out zero values
                     rounded_total = round(total, 2)
                     category_expenses[category_name] = rounded_total
-                    total_expenses += rounded_total
+                    total_expenses += rounded_total  # Add to total expenses
 
+        # Include the total expenses in the response
         result = {
             "category_expenses": category_expenses,
             "total_predicted_expense": round(total_expenses, 2)
