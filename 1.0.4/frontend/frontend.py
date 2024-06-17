@@ -12,7 +12,7 @@ month = st.selectbox("Select Month", options=list(range(1, 13)), format_func=lam
 # Button to trigger prediction
 if st.button("Predict Expenses"):
     # Make request to the Flask API
-    response = requests.get(f"http://budget-analyse.onrender.com/predict?year={year}&month={month}")
+    response = requests.get(f"https://budget-analyse.onrender.com/predict?year={year}&month={month}")
     
     if response.status_code == 200:
         predictions = response.json()
