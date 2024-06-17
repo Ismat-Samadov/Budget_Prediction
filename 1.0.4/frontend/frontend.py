@@ -30,6 +30,7 @@ if st.button("Predict Expenses"):
         st.dataframe(pred_df)
         
         # Display total predicted expense
-        st.subheader(f"Total Predicted Expense: ₼{total_expense['Predicted Expense'].values[0]:.2f}")
+        total_expense_amount = total_expense['Predicted Expense'].values[0]
+        st.subheader(f"Total Predicted Expense: ₼{total_expense_amount:.2f}")
     else:
         st.error("Failed to fetch predictions. Please try again.")
