@@ -26,7 +26,7 @@ For more detailed insights into the project's architecture, development process,
 
 1. Clone the repository and navigate to the 1.0.2 folder:
    ```bash
-   git clone https://github.com/Ismat-Samadov/Budget_Analyse.git
+   git clone https://github.com/Ismat-Samadov/Budget_Prediction.git
    cd Budget_Analyse/1.0.2
    ```
 
@@ -75,4 +75,4 @@ Contributions are welcome! Please fork the repository and submit pull requests f
 
 Ismat Samadov - [ismetsemedov@gmail.com](mailto:ismetsemedov@gmail.com)
 
-Project Link: [https://github.com/Ismat-Samadov/Budget_Analyse](https://github.com/Ismat-Samadov/Budget_Analyse)
+Project Link: [https://github.com/Ismat-Samadov/Budget_Prediction.git](https://github.com/Ismat-Samadov/Budget_Prediction.git)
