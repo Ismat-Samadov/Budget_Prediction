@@ -36,11 +36,26 @@ def predict():
         for day in range(1, num_days + 1):
             day_of_week = calendar.weekday(year, month, day)  # Get the day of the week
             input_data = np.array([[year, month, day, day_of_week, category_encoded]])  # Use 5 features including day and day_of_week
+            
+            # Debugging step to ensure correct input before scaling
+            print(f"Original input before scaling: {input_data}")
+            
             input_scaled = scaler.transform(input_data)
+            
+            # Debugging step to check scaled input
+            print(f"Scaled input: {input_scaled}")
+            
             predicted_amount_scaled = model.predict(input_scaled)
+            
+            # Debugging step to check predicted scaled amount
+            print(f"Predicted (scaled): {predicted_amount_scaled}")
             
             # Inverse transform the predicted scaled amount back to original scale using MinMaxScaler
             predicted_amount = scaler_target.inverse_transform([[predicted_amount_scaled[0]]])[0][0]
+            
+            # Debugging step to check predicted amount after inverse scaling
+            print(f"Predicted amount (after inverse scaling): {predicted_amount}")
+            
             category_total += predicted_amount  # Sum daily predictions for the current category
 
         predictions[category] = category_total  # Store the total for the category
