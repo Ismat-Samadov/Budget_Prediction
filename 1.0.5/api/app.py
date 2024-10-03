@@ -7,7 +7,7 @@ import calendar
 model = joblib.load('rf_model.pkl')
 scaler = joblib.load('scaler.pkl')
 label_encoder = joblib.load('label_encoder.pkl')
-scaler_target = joblib.load('scaler_target.pkl')  # Load the target scaler for inverse scaling
+scaler_target = joblib.load('scaler_target.pkl')  # Load the target scaler (MinMaxScaler)
 
 app = Flask(__name__)
 
@@ -34,12 +34,12 @@ def predict():
         
         # Iterate over each day of the month
         for day in range(1, num_days + 1):
-            day_of_week = calendar.weekday(year, month, day)  # Get the day of the week (0 for Monday, 6 for Sunday)
+            day_of_week = calendar.weekday(year, month, day)  # Get the day of the week
             input_data = np.array([[year, month, day, day_of_week, category_encoded]])  # Use 5 features including day and day_of_week
             input_scaled = scaler.transform(input_data)
             predicted_amount_scaled = model.predict(input_scaled)
             
-            # Inverse transform the predicted scaled amount back to original scale
+            # Inverse transform the predicted scaled amount back to original scale using MinMaxScaler
             predicted_amount = scaler_target.inverse_transform([[predicted_amount_scaled[0]]])[0][0]
             category_total += predicted_amount  # Sum daily predictions for the current category
 
