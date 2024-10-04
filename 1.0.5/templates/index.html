@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Predict Monthly Expenses</h1>
+    <div class="container">
+        <form id="predictionForm">
+            <label for="year">Year</label>
+            <input type="number" id="year" name="year" value="2024" required>
+
+            <label for="month">Month</label>
+            <input type="number" id="month" name="month" value="11" required>
+
+            <button type="submit">Predict Expenses</button>
+        </form>
+
+        <div class="results" id="results" style="display: none;">
+            <h2>Predicted Expenses:</h2>
+            <p>Total Monthly Expense: <strong id="totalExpense"></strong></p>
+            <ul id="categoryExpenses"></ul>
+        </div>
+
+        <div class="error" id="error" style="display: none;"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
