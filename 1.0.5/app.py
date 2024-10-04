@@ -3,6 +3,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import calendar
+from flask_cors import CORS
 
 # Load the saved model, scalers, and feature columns
 model = joblib.load('rf_model.pkl')
@@ -11,6 +12,7 @@ scaler_target = joblib.load('scaler_target.pkl')
 feature_columns = joblib.load('feature_columns.pkl')
 
 app = Flask(__name__, static_folder='static') 
+CORS(app)  # Enable CORS for cross-origin requests
 
 # Route to serve the HTML page
 @app.route('/')
@@ -69,5 +71,6 @@ def predict():
         'total_monthly_expense': total_monthly_expense
     })
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Render provides PORT
+    app.run(host='0.0.0.0', port=port)
