@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import calendar
 from flask_cors import CORS
+import os  # Needed for port environment variable
 
 # Load the saved model, scalers, and feature columns
 model = joblib.load('rf_model.pkl')
@@ -72,5 +73,5 @@ def predict():
     })
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Render provides PORT
+    port = int(os.environ.get("PORT", 5000))  # Use the provided port or default to 5000
     app.run(host='0.0.0.0', port=port)
