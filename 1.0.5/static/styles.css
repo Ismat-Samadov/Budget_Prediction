@@ -19,7 +19,7 @@ h1 {
     border-radius: 8px;
 }
 
-label, input, button {
+label, select, button {
     display: block;
     width: 100%;
     margin: 10px 0;
@@ -27,7 +27,7 @@ label, input, button {
     font-size: 16px;
 }
 
-input, button {
+select, button {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -42,19 +42,22 @@ button:hover {
     background-color: #218838;
 }
 
-.results {
+canvas {
     margin-top: 20px;
-}
-
-.results ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.results li {
-    margin: 5px 0;
+    max-width: 100%;
 }
 
 .error {
     color: red;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
 }
