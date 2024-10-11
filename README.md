@@ -1,4 +1,4 @@
-# Budget Analyse
+# Budget Prediction
 
 This project provides a machine learning solution for analyzing and predicting budget-related data, using a RandomForest algorithm. It is designed to be interactive and user-friendly, encompassing model training, a Flask API for predictions, and a Streamlit frontend for user interaction.
 
