@@ -56,12 +56,6 @@ For more detailed insights into the project's architecture, development process,
    ```
    The API will listen for and respond to prediction requests.
 
-3. **Launch the Streamlit Frontend**:
-   With the API running, initiate the Streamlit app:
-   ```bash
-   streamlit run frontend.py
-   ```
-   This opens a web interface where users can input data and receive predictions in real-time.
 
 ## Contributing
 
