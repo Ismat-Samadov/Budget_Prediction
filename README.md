@@ -27,7 +27,7 @@ For more detailed insights into the project's architecture, development process,
 1. Clone the repository and navigate to the 1.0.2 folder:
    ```bash
    git clone https://github.com/Ismat-Samadov/Budget_Prediction.git
-   cd Budget_Prediction/1.0.2
+   cd Budget_Prediction/1.0.5
    ```
 
 2. (Optional) Set up a virtual environment:
