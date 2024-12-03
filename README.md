@@ -63,10 +63,6 @@ For more detailed insights into the project's architecture, development process,
    ```
    This opens a web interface where users can input data and receive predictions in real-time.
 
-### Live Application
-
-Access the live application at: [Budget Analyse on Streamlit](https://budgett.streamlit.app/). This provides an interactive platform to explore the functionalities of the tool.
-
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit pull requests for any changes. For major modifications, please open an issue first to discuss what you would like to change. Ensure you update or add appropriate tests as necessary.
