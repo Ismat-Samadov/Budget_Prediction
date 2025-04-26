@@ -60,9 +60,3 @@ For more detailed insights into the project's architecture, development process,
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit pull requests for any changes. For major modifications, please open an issue first to discuss what you would like to change. Ensure you update or add appropriate tests as necessary.
-
-## Contact
-
-Ismat Samadov - [ismetsemedov@gmail.com](mailto:ismetsemedov@gmail.com)
-
-Project Link: [https://github.com/Ismat-Samadov/Budget_Prediction.git](https://github.com/Ismat-Samadov/Budget_Prediction.git)
